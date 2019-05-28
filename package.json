@@ -3,6 +3,7 @@
   "version": "0.8.3",
   "description": "Touch backend for react-dnd",
   "main": "dist/Touch.js",
+  "typings": "dist/Touch.d.ts",
   "scripts": {
     "clean": "rimraf dist/**/* examples/*.browserified.js",
     "js-dev": "browserify ./examples/sortableLists/js/index.jsx -o ./examples/sortableLists/main.browserified.js",
