@@ -154,11 +154,11 @@ function getNodeClientOffset(node) {
 }
 
 interface EventName {
-    start?: 'mousedown' | 'touchstart'
-    move?: 'mousemove' | 'touchmove'
-    end?: 'mouseup' | 'touchend'
-    contextmenu?: 'contextmenu'
-    keydown?: 'keydown'
+  start?: 'mousedown' | 'touchstart'
+  move?: 'mousemove' | 'touchmove'
+  end?: 'mouseup' | 'touchend'
+  contextmenu?: 'contextmenu'
+  keydown?: 'keydown'
 }
 
 const eventNames: Record<LISTENER_TYPE, EventName> = {
@@ -193,8 +193,8 @@ export interface Opts {
 }
 
 interface AngleRange {
-    start: number
-    end: number
+  start: number
+  end: number
 }
 
 const enum LISTENER_TYPE {
@@ -353,7 +353,12 @@ export class TouchBackend implements Backend {
     this.uninstallSourceNodeRemovalObserver()
   }
 
-  addEventListener<K extends keyof EventName>(subject: HTMLElement | Window, event: K, handler: (e: WindowEventMap[EventName[K]]) => void, capture?: boolean) {
+  addEventListener<K extends keyof EventName>(
+    subject: HTMLElement | Window,
+    event: K,
+    handler: (e: WindowEventMap[EventName[K]]) => void,
+    capture?: boolean
+  ) {
     const options = supportsPassive ? { capture, passive: false } : capture
 
     this.listenerTypes.forEach(function(listenerType) {
@@ -365,7 +370,12 @@ export class TouchBackend implements Backend {
     })
   }
 
-  removeEventListener<K extends keyof EventName>(subject: HTMLElement| Window, event: K, handler: (e: WindowEventMap[EventName[K]]) => void, capture?: boolean) {
+  removeEventListener<K extends keyof EventName>(
+    subject: HTMLElement | Window,
+    event: K,
+    handler: (e: WindowEventMap[EventName[K]]) => void,
+    capture?: boolean
+  ) {
     const options = supportsPassive ? { capture, passive: false } : capture
 
     this.listenerTypes.forEach(function(listenerType) {
@@ -412,11 +422,17 @@ export class TouchBackend implements Backend {
        */
       switch (e.type) {
         case eventNames.mouse.move:
-          coords = { x: (e as MouseEvent).clientX, y: (e as MouseEvent).clientY }
+          coords = {
+            x: (e as MouseEvent).clientX,
+            y: (e as MouseEvent).clientY
+          }
           break
 
         case eventNames.touch.move:
-          coords = { x: (e as TouchEvent).touches[0].clientX, y: (e as TouchEvent).touches[0].clientY }
+          coords = {
+            x: (e as TouchEvent).touches[0].clientX,
+            y: (e as TouchEvent).touches[0].clientY
+          }
           break
       }
 
@@ -440,11 +456,7 @@ export class TouchBackend implements Backend {
 
     return () => {
       delete this.targetNodes[targetId]
-      this.removeEventListener(
-        document.body,
-        'move',
-        handleMove
-      )
+      this.removeEventListener(document.body, 'move', handleMove)
     }
   }
 
@@ -709,11 +721,15 @@ export class TouchBackend implements Backend {
   }
 }
 
-function isDragDropManager (optionsOrManager: DragDropManager<any> | Opts): optionsOrManager is DragDropManager<any> {
-    return !!(optionsOrManager as DragDropManager<any>).getMonitor
+function isDragDropManager(
+  optionsOrManager: DragDropManager<any> | Opts
+): optionsOrManager is DragDropManager<any> {
+  return !!(optionsOrManager as DragDropManager<any>).getMonitor
 }
 
-export default function createTouchBackend(optionsOrManager: DragDropManager<any> | Opts) {
+export default function createTouchBackend(
+  optionsOrManager: DragDropManager<any> | Opts
+) {
   const touchBackendFactory = function(manager: DragDropManager<any>) {
     return new TouchBackend(manager, optionsOrManager as Opts)
   }
@@ -731,7 +747,13 @@ function distance(x1: number, y1: number, x2: number, y2: number) {
   )
 }
 
-function inAngleRanges(x1: number, y1: number, x2: number, y2: number, angleRanges?: AngleRange[]) {
+function inAngleRanges(
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+  angleRanges?: AngleRange[]
+) {
   if (!angleRanges) {
     return false
   }
