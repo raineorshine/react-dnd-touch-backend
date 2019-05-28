@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { default as Touch } from '../../../src/Touch';
+import { default as Touch } from '../../../dist/Touch';
 import { DragDropContext } from 'react-dnd';
 import Source from './Source.jsx';
 import Target from './Target.jsx';

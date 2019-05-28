@@ -8,7 +8,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import List from './List.jsx';
 import ListItem from './ListItem.jsx';
-import Touch from '../../../src/Touch';
+import Touch from '../../../dist/Touch';
 import {DragDropContext} from 'react-dnd';
 import _ from 'lodash';
 

@@ -10,10 +10,11 @@
     "js-dev-hover": "browserify ./examples/hoverOutside/js/index.jsx -o ./examples/hoverOutside/main.browserified.js",
     "start": "http-server ./examples -p 7789",
     "dev": "npm run js-dev && npm run js-dev-drop && npm run js-dev-hover && npm run start",
-    "compile": "babel src/Touch.js --out-file dist/Touch.js",
+    "compile": "tsc",
     "lint": "eslint --quiet --cache . --ext .js --ext .jsx",
     "prepublishOnly": "npm run clean && npm run compile",
-    "test": "npm run clean && npm run lint"
+    "test": "npm run clean && npm run lint",
+    "prettier": "prettier --write src/*.ts"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
   },
   "homepage": "https://github.com/yahoo/react-dnd-touch-backend#readme",
   "dependencies": {
+    "dnd-core": "^7.4.4",
     "invariant": "^2.2.4"
   },
   "peerDependencies": {
@@ -53,11 +55,13 @@
     "http-server": "^0.11.1",
     "immutable": "^3.8.2",
     "lodash": "^4.17.11",
+    "prettier": "^1.17.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.2",
     "react-dnd": "^7.0.2",
     "react-dom": "^16.8.2",
-    "rimraf": "2.6.3"
+    "rimraf": "2.6.3",
+    "typescript": "^3.4.5"
   },
   "browserify": {
     "transform": [
@@ -65,5 +69,9 @@
         "babelify"
       ]
     ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false
   }
 }

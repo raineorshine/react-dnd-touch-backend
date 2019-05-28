@@ -8,7 +8,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import SortableList from './SortableList.jsx';
 import Immutable from 'immutable';
-import Touch from '../../../src/Touch';
+import Touch from '../../../dist/Touch';
 import { DragDropContext } from 'react-dnd';
 import { default as ItemPreview } from './ItemPreview.jsx';
 
