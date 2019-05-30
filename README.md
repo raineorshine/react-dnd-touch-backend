@@ -9,7 +9,7 @@
 
 Touch Backend for [react-dnd](https://github.com/gaearon/react-dnd)
 
-## Instalation
+## Installation
 
 npm:
 
@@ -39,51 +39,58 @@ class YourApp extends Component {
 export default DragDropContext(TouchBackend)(YourApp);
 ```
 
-### Options
-
-You have the following options available to you, which you can pass in like so:
-
-```js
-DragDropContext(TouchBackend(options))
-```
-
-Options include:
-
-- enableTouchEvents
-- enableMouseEvents
-- enableKeyboardEvents
-- delayTouchStart
-- delayMouseStart
-- touchSlop
-- ignoreContextMenu
-- scrollAngleRanges
-- enableHoverOutsideTarget
-
 ## Tips
 ### Drag Preview
 Since native Drag-n-Drop is not currently supported in touch devices. A custom [DragPreview](https://react-dnd.github.io/react-dnd/examples/drag-around/custom-drag-layer) is required. Check out the [example](https://github.com/yahoo/react-dnd-touch-backend/blob/master/examples/dropTarget/js/DragPreview.jsx) for a sample implementation.
 
 We might try to build it directly in the Backend itself in the future to compensate for this limitation.
 
-### Mouse events support*
-You can enable capturing mouse events by configuring your TouchBackend as follows:
+## Options
+
+You can pass in options like so (defaults shown):
+
 ```js
-DragDropContext(TouchBackend({ enableMouseEvents: true }));
+DragDropContext(TouchBackend({
+  enableTouchEvents: true,
+  enableMouseEvents: false,
+  enableKeyboardEvents: false,
+  ignoreContextMenu: false,
+  enableHoverOutsideTarget: false,
+  delayTouchStart: 0,
+  delayMouseStart: 0,
+  touchSlop: 0,
+  scrollAngleRanges: undefined
+}))
 ```
+
+**enableTouchEvents**
+* Default: `true`
+
+**enableMouseEvents**
+* Default: `false`
+
 **NOTE*: This is buggy due to the difference in `touchstart/touchend` event propagation compared to `mousedown/mouseup/click`. I highly recommend that you use [react-dnd-html5-backend](https://github.com/gaearon/react-dnd-html5-backend) instead for a more performant native HTML5 drag capability.**
 
-### Other options
+**enableKeyboardEvents**
+* Default: `false`
+
+**delayTouchStart**
+* Default: `0`
+
+**delayMouseStart**
+* Default: `0`
+
 **touchSlop**
 
 * Specifies the pixel distance moved before a drag is signaled.
-* Default: 0
+* Default: `0`
 ```js
 DragDropContext(TouchBackend({ touchSlop: 20 }));
 ```
 **ignoreContextMenu**
 
 * If true, prevents the `contextmenu` event from canceling a drag.
-* Default: false
+* Default: `false`
 ```js
 DragDropContext(TouchBackend({ ignoreContextMenu: true }));
 ```
@@ -93,7 +100,7 @@ DragDropContext(TouchBackend({ ignoreContextMenu: true }));
 * Specifies ranges of angles in degrees that drag events should be ignored. This is useful when you want to allow the 
 user to scroll in a particular direction instead of dragging. Degrees move clockwise, 0/360 pointing to the 
 left. 
-* Default: undefined
+* Default: `undefined`
 ```js
 // allow vertical scrolling
 DragDropContext(TouchBackend({ scrollAngleRanges: [{ start: 30, end: 150 }, { start: 210, end: 330 }] }));
@@ -105,14 +112,14 @@ DragDropContext(TouchBackend({ scrollAngleRanges: [{ start: 300 }, { end: 60 }, 
 **enableHoverOutsideTarget**
 
 * Continue dragging of currently dragged element when pointer leaves DropTarget area
-* Default: undefined
+* Default: `undefined`
 ```js
 DragDropContext(TouchBackend({ enableHoverOutsideTarget: true }));
 ```
 
 **getDropTargetElementsAtPoint**
-* Specify a custom function to find drop target elements at the given point.  Useful for improving performance in environments (iOS Safari) where document.elementsFromPoint is not available.
-* Default: undefined (use document.elementsFromPoint or inline elementsFromPoint "polyfill")
+* Specify a custom function to find drop target elements at the given point.  Useful for improving performance in environments (iOS Safari) where `document.elementsFromPoint` is not available.
+* Default: `undefined` (use `document.elementsFromPoint` or inline elementsFromPoint "polyfill")
 ```js
 const hasNative = document && (document.elementsFromPoint || document.msElementsFromPoint);
 
